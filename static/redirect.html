@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=7"/>
+
+</head>
+<style>
+  .ads-container {
+  }
+
+  body {
+  }
+
+  .mgid-container {
+    margin: auto;
+    width: 780px;
+  }
+
+  .info-container {
+    margin: auto;
+    margin-bottom: 32px;
+  }
+
+  .info-title {
+    font-family: "Helvetica", "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .highlight {
+    color: #E32636;
+    font-weight: 700;
+  }
+
+  .info-desc {
+    font-family: "Helvetica", "Roboto", sans-serif;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .ads-container {
+    margin-top: 16px;
+    padding: 0px;
+  }
+
+  iframe {
+    /*width: 100% !important;*/
+  }
+</style>
+<body>
+<script data-ad-client="8" async
+        src="http://cdn1.vda.viettel.vn/new-bucket-b7b235a8/sdk/v7/sdk-display-ads.min.js?v=1.0.9"></script>
+<script src="https://jsc.mgid.com/1/2/125.235.4.59.1372283.js" async></script>
+<div class="info-container">
+  <div class="info-title">
+    Địa chỉ truy cập không tồn tại
+  </div>
+  <div class="info-desc">
+    <!--    <div>Kính mời quý khách trải nghiệm các dịch vụ của Viettel</div>-->
+  </div>
+</div>
+<div class="mgid-container" id="mgid-root">
+  <div id="M835095ScriptRootC1372283"></div>
+</div>
+<div class="ads-container">
+  <ins
+    class="adsbyvda"
+    style="display: block"
+    data-ad-format="auto"
+    data-ad-layout-key="default"
+    data-full-width-responsive="false"
+    data-ad-client="8"
+    data-ad-slot="48"
+  ></ins>
+</div>
+
+<script>
+  (adsbyvda = window.adsbyvda || []).push({});
+  window.vdaAsyncInit = function () {
+    window.adsbyvda.init({
+      eventListenerMessage: function (e) {
+      }
+    });
+  };
+  var req = new XMLHttpRequest();
+  req.open('GET', "https://vdadelivery.viettel.vn/banners?client_id=0714833e-ea12-4989-9f35-fe856964382e&zone_id=63", false);
+   req.send(null);
+  var headers = req.getAllResponseHeaders().toLowerCase();
+  alert(headers);
+</script>
+<script src="ads_logs.js"></script>
+</body>
+</html>

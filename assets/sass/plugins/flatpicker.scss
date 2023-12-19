@@ -1,0 +1,24 @@
+.flatpickr-input {
+  &.hide-input {
+    display: none;
+  }
+
+  &.hide-border {
+    + .flatpickr-calendar {
+      box-shadow: none;
+      border: none;
+      border-radius: 0
+    }
+  }
+}
+
+//.theme--dark {
+//  .flatpickr-calendar {
+//    background: rgb(30,30,30);
+//    color: #FFFFFF!important;
+//  }
+//  .flatpickr-weekdays {
+//    color: #FFF!important;
+//  }
+//}
+

@@ -1,0 +1,4 @@
+phone,param1,param2
+0123456789,Nguyen Van A,800
++84987361811,Le Van B,1000
+0987361821,Nguyen Thi C,1200

@@ -1,0 +1,27 @@
+FROM node:14
+
+ARG BUILD_ARGUMENT_ENV=prod
+ENV ENV=$BUILD_ARGUMENT_ENV
+
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Create app directory
+WORKDIR /app
+ADD . /app/
+COPY .env.$ENV /app/.env
+# global install & update
+#RUN npm i -g npm && npm i -g yarn
+
+RUN rm yarn.lock
+RUN rm -rf node_modules
+RUN yarn
+RUN yarn install
+RUN yarn build
+
+ENV HOST 0.0.0.0
+EXPOSE 3000
+
+# start command
+CMD [ "yarn", "start" ]
+

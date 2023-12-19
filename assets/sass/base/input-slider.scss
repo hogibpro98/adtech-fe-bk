@@ -1,0 +1,15 @@
+.input-slider {
+  &.no-margin {
+    .v-slider--horizontal {
+      margin: 0 !important;
+    }
+  }
+
+  .prepend-text, .append-text {
+    height: 24px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start
+  }
+}

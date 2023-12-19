@@ -1,0 +1,109 @@
+
+.pdf-container {
+  position: relative;
+  top: 0;
+}
+.previous-document-icon {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  background-color: map-get($grey, "lighten-1");
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+.next-document-icon {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  background-color:map-get($grey, "lighten-1");
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+.previous-document-icon:hover,
+.next-document-icon:hover {
+  background-color: map-get($light-blue, "darken-2");
+}
+.pdf-controller {
+  position: absolute;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 4%;
+  background: rgba(0, 0, 0, 0.75);
+  height: 50px;
+  width: 250px;
+  border-radius: 4px;
+  z-index: 10;
+  left: 50%;
+  padding: 0 16px;
+  transform: translateX(-50%);
+  transition: all 0.1s linear;
+}
+.document-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 16px 16px;
+  z-index: 10;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.65) 0%,
+      transparent 100%
+  );
+  font-size: 18px;
+  color: white;
+  height: 60px;
+  transition: all 0.1s linear;
+  opacity: 1;
+}
+.hidden {
+  opacity: 0;
+}
+.input-page-num ::v-deep input[type="number"] {
+  -moz-appearance: textfield;
+}
+.input-page-num ::v-deep input::-webkit-outer-spin-button,
+.input-page-num ::v-deep input::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.input-page-num ::v-deep input {
+  text-align: center;
+}
+.img-container {
+  background-image: url("~/static/background/transparent-bg.jpg");
+  background-repeat: repeat;
+}
+.file-name {
+  max-width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.file-loaded-fail{
+  height: 100%;
+  width: 100%;
+  background-color: map-get($grey, "darken-1");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: white;
+  font-size: 19px;
+  padding: 0px 58px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}

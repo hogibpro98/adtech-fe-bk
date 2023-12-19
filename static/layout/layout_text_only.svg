@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="56px" viewBox="0 0 128 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>layout_text_only</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="128" height="56"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="128" height="56" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="layout_text_only">
+            <use id="Rectangle-87" stroke-opacity="0.7" stroke="#F4B400" mask="url(#mask-2)" stroke-width="4" fill="#FFFFFF" stroke-dasharray="4,2" xlink:href="#path-1"></use>
+            <rect id="Rectangle-39" fill="#C9C9C9" opacity="0.9" x="29" y="12" width="88" height="6"></rect>
+            <rect id="Rectangle-39" fill="#C9C9C9" opacity="0.9" x="29" y="24" width="88" height="6"></rect>
+            <rect id="Rectangle-39" fill="#C9C9C9" opacity="0.9" x="29" y="36" width="48" height="6"></rect>
+            <g id="ad-badge">
+                <rect id="Rectangle-1166" fill="#F09300" x="0" y="0" width="19" height="15"></rect>
+                <text id="Ad" font-family="Roboto-Bold, Roboto" font-size="10" font-weight="bold" fill="#FFFFFF">
+                    <tspan x="3.31835938" y="10">Ad</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

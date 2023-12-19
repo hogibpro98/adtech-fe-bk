@@ -1,0 +1,28 @@
+$data-title-after-bg-color: rgb(123 124 124);
+
+[data-title] {
+  position: relative !important;
+  &:after{
+    content: attr(data-title) !important;
+    background-color: $data-title-after-bg-color !important;
+    height: fit-content !important;
+    width: fit-content !important;
+    color: white !important;
+    font-size: 0.7rem !important;
+    position: absolute !important;
+    padding: 8px 12px;
+    bottom: -1.6em;
+    top: 30px !important;
+    font-style: normal !important;
+    white-space: nowrap;
+    opacity: 0;
+    z-index: 99999;
+    border-radius: 4px !important;
+    visibility: hidden !important;
+  }
+  &:hover:after{
+    opacity: 1 !important;
+    transition: opacity 0.5s ease-in-out;
+    visibility: visible !important;
+  }
+}

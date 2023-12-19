@@ -1,0 +1,53 @@
+table {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.data-table-cell {
+  padding: 8px 0;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.text-start {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.search-bar {
+  max-width: 16rem !important;
+
+  //&.v-input--is-focused > .v-input__control > .v-input__slot {
+  //    background-color: rgba(0, 0, 0, 0.06) !important;
+  //    color: rgba(0, 0, 0, 0.87) !important;
+  //    input {
+  //      color: rgba(0, 0, 0, 0.87) !important;
+  //    }
+  //}
+}
+
+.data-table__toolbar {
+  .v-toolbar__content {
+    justify-content: flex-end;
+  }
+}
+
+.v-data-table {
+  th {
+    flex-direction: row;
+    align-items: center;
+  }
+  td.text-right {
+    padding-right: 32px!important;
+  }
+  th.text-right:not(.sortable) {
+    padding-right: 32px!important;
+  }
+  td{
+    word-break: break-word;
+  }
+}

@@ -1,0 +1,99 @@
+.form-input {
+  .check-box {
+    &:not(:last-of-type) {
+      margin-right: 22px;
+    }
+
+    &.size-small {
+      .v-input--selection-controls__input {
+        margin-right: 4px;
+      }
+
+      .v-icon {
+        font-size: 18px;
+      }
+
+      .v-input--selection-controls__ripple {
+        height: 24px;
+        width: 24px;
+        left: -4px;
+        top: calc(50% - 16px);
+        margin: 4px;
+      }
+
+      .v-label {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .v-messages {
+    min-height: 0;
+  }
+
+  .form-group {
+
+      margin-top: 16px;
+
+  }
+}
+
+.show-tag-select {
+  .v-autocomplete {
+    padding: 0!important;
+  }
+}
+
+.v-text-field__details {
+  min-height: 0!important;
+}
+
+.v-treeview {
+  &.small {
+    .v-treeview-node {
+      .v-treeview-node__root {
+        min-height: auto;
+        padding: 0;
+      }
+
+      .v-treeview-node__toggle {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+
+        &:after {
+          transform: scale(1);
+        }
+      }
+
+      .v-treeview-node__checkbox {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+
+        margin-left: 0;
+        margin-top: 5.5px;
+        margin-bottom: auto;
+      }
+
+      .v-treeview-node__content {
+        margin-left: 4px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+
+      .v-treeview-node__level {
+        width: 20px;
+      }
+
+      .v-treeview-node__label {
+        white-space: initial;
+      }
+    }
+  }
+}
+
+.criteria-select {
+  width: 5rem;
+  font-weight: 400;
+}

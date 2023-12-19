@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    },
+    "typeRoots": ["./node_modules/vuetify/types"],
+    "types": [
+      "~/interface/data/global",
+      "@types/node",
+      "@nuxt/vue-app",
+      "@nuxtjs/auth-next",
+      "@nuxtjs/axios",
+      "@nuxtjs/vuetify"
+    ]
+  },
+  "exclude": [
+    "nuxt.config.ts",
+    "node_modules/**",
+    "dist/**",
+    ".nuxt/**",
+    "tests/**"
+  ]
+}

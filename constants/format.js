@@ -1,0 +1,11 @@
+export const SQL_DATE = "YYYY-MM-DD";
+export const DATE = "DD/MM/YYYY";
+export const MONTH = "MM/YYYY";
+export const SQL_MONTH = "YYYY-MM";
+export const SQL_TIMESTAMP = "YYYY-MM-DD HH:mm:ss";
+export const TIMESTAMP = "DD/MM/YYYY HH:mm:ss";
+export const TIME = "HH:mm:ss";
+export const DATE_TIME = "HH:mm:ss DD/MM/YYYY";
+export const DECIMAL = "0,0.[00]";
+export const MIN_DECIMAL = 0.001;
+export const REQUEST_DATE = "YYYY/MM/DD";

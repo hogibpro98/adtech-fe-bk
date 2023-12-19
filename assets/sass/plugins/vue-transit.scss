@@ -1,0 +1,35 @@
+.v-transmit__upload-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px!important;
+  z-index: 10;
+  cursor: pointer;
+  border: 1px dashed #bdbdbd;
+  height: 23vh;
+  min-height: 23vh;
+}
+
+.error--text {
+  .v-transmit__upload-area {
+    border-color: #ff5252 !important
+  }
+}
+
+.v-transmit {
+  position: relative;
+}
+.v-transmit__preview{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.v-transmit-close-all {
+  position: absolute;
+  z-index: 11;
+  right: 0;
+  top: 0;
+}
+

@@ -1,0 +1,360 @@
+<template>
+  <v-container grid-list-xl fluid class="no-padding no-margin">
+    <v-layout row wrap>
+      <v-flex lg12>
+        <v-card></v-card>
+        <new-custom-filter v-model="searchParams" :filters="filterShow" />
+
+        <v-divider />
+        <api-data-table
+          ref="table"
+          v-bind="$attrs"
+          :resource="resource"
+          :headers="headerShow"
+          :filter="filterTable"
+          :start-index.sync="startIndex"
+          :toolbar="toolbarShow"
+          :page-name="pageName"
+          @change-table-headers="changeColumnShows"
+          @change-filter="changeTableFilter"
+        >
+          <template slot="item.user_id" slot-scope="props">
+            {{ props.item.user && props.item.user.full_name }}
+          </template>
+          <template slot="item.url" slot-scope="props">
+            <div class="text-left">
+              <p>{{ props.item.url }}</p>
+            </div>
+          </template>
+          <template slot="item.status" slot-scope="props">
+            <v-chip
+              v-if="renderStatus(props.item)"
+              :color="renderStatus(props.item).color"
+              class="w-full justify-content-center"
+              small
+              label
+            >
+              {{ renderStatus(props.item).text }}
+            </v-chip>
+          </template>
+
+          <template slot="item.num_pageview" slot-scope="props">
+            <div class="text-right">
+              <p>{{ props.item.num_pageview | numberSpace }}</p>
+            </div>
+          </template>
+          <template slot="item.num_view" slot-scope="props">
+            <div class="text-right">
+              <p>{{ props.item.num_view | numberSpace }}</p>
+            </div>
+          </template>
+          <template slot="item.num_click" slot-scope="props">
+            <div class="text-right">
+              <p>{{ props.item.num_click | numberSpace }}</p>
+            </div>
+          </template>
+
+          <template slot="item.full_date" slot-scope="props">
+            <div class="text-center">
+              <p>{{ props.item.full_date | date }}</p>
+            </div>
+          </template>
+          <template slot="item.created_at" slot-scope="props">
+            <div class="text-center">
+              <p>{{ props.item.created_at | date }}</p>
+            </div>
+          </template>
+
+          <template v-if="summary" #body.prepend="{ headers, isMobile }">
+            <tr v-if="!isMobile">
+              <td
+                class="font-weight-bold nowrap"
+                style="border-right: none!important;"
+              >
+                Tổng
+              </td>
+              <template v-for="(header, index) in columnShows">
+                <td
+                  v-if="index !== 0"
+                  :key="`column-prepend-${index}`"
+                  style="border-right: none!important;"
+                  class="text-right nowrap"
+                >
+                  <div class="text-right font-weight-bold">
+                    <p>{{ renderShowColumn(header, index) }}</p>
+                  </div>
+                </td>
+              </template>
+            </tr>
+          </template>
+        </api-data-table>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+import cloneDeep from "lodash/cloneDeep";
+import NewCustomFilter from "~/components/common/NewCustomFilter";
+import ApiDataTable from "~/components/table/ApiDataTable";
+import { ROLE_AGENCY, ROLE_IS_ADMIN } from "~/constants/role";
+import { INVENTORY_REVENUE } from "~/constants/resource";
+import { NUMBER } from "~/constants/filterType";
+import { STATUS_INVENTORY } from "~/constants/dataSelect";
+export default {
+  name: "RevenueMMS",
+  components: {
+    ApiDataTable,
+    NewCustomFilter
+  },
+  layout: "dashboard",
+  props: {
+    pageName: {
+      type: String,
+      default: "report-publisher-revenue-device"
+    },
+    toolbar: {
+      type: Object,
+      default: () => ({
+        isDownload: true,
+        exportResource: INVENTORY_REVENUE
+      })
+    },
+    filterCustom: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data() {
+    return {
+      startIndex: 0,
+      searchParams: null,
+      tableFilter: {},
+      summary: null,
+      timeoutSummary: null,
+      columnShows: []
+    };
+  },
+  computed: {
+    headerShow() {
+      let headers = [...this.headers];
+      if (this.$authHasRole(ROLE_AGENCY) && !this.$authHasRole(ROLE_IS_ADMIN)) {
+        headers = headers.filter(h => h.value !== "agency");
+      }
+      return headers;
+    },
+    filterShow() {
+      const isAdmin = this.$authHasRole(ROLE_IS_ADMIN);
+      const isAgency = this.$authHasRole(ROLE_AGENCY);
+
+      if (isAdmin) {
+        return this.filters;
+      } else if (isAgency) {
+        return this.filters.filter(f => f.name !== "agency_id");
+      } else {
+        return this.filters;
+      }
+    },
+    filters() {
+      return [
+        {
+          type: NUMBER,
+          name: "num_click",
+          props: {
+            rules: "numeric|required"
+          },
+          label: "Tổng số click"
+        },
+        {
+          type: NUMBER,
+          name: "num_view",
+          props: {
+            rules: "numeric|required"
+          },
+          label: "Tổng số view"
+        },
+        {
+          type: NUMBER,
+          name: "ctr",
+          props: {
+            rules: "numeric|required"
+          },
+          label: "Tổng số ctr"
+        },
+        {
+          type: NUMBER,
+          name: "total_money",
+          props: {
+            rules: "numeric|required"
+          },
+          label: "Tổng doanh thu"
+        }
+      ];
+    },
+    headers() {
+      return [
+        {
+          text: "Thời gian",
+          value: "created_at",
+          width: 160,
+          align: "center"
+        },
+        {
+          text: "Publisher",
+          value: "user_id",
+          sortable: false,
+          width: 240
+        },
+        {
+          text: "Tên",
+          value: "name",
+          width: 120,
+          sortable: false
+        },
+        {
+          text: "Kiểu hiển thị",
+          value: "type",
+          width: 160,
+          sortable: false
+        },
+        {
+          text: "URL",
+          value: "url",
+          sortable: false,
+          width: 300
+        },
+        {
+          text: "Trạng thái",
+          value: "status",
+          sortable: false,
+          width: 150
+        },
+        {
+          text: "Lý do từ chối",
+          value: "reason",
+          sortable: false,
+          width: 300
+        },
+        {
+          text: "Tổng số click",
+          value: "num_click",
+          align: "right",
+          sortable: false,
+          width: 150
+        },
+        {
+          text: "Tổng số view",
+          value: "num_view",
+          sortable: false,
+          width: 150,
+          align: "right"
+        },
+        {
+          text: "Tổng CTR",
+          value: "ctr",
+          sortable: false,
+          width: 150,
+          align: "right"
+        },
+        {
+          text: "Tổng doanh thu",
+          value: "total_money",
+          sortable: false,
+          width: 150,
+          align: "right"
+        }
+      ];
+    },
+    resource() {
+      return INVENTORY_REVENUE;
+    },
+    filterTable() {
+      const searchParamsFilter = this.searchParams || {};
+      const filterCustomProps = this.filterCustom || {};
+      return {
+        ...searchParamsFilter,
+        ...filterCustomProps
+      };
+    },
+    filterAll() {
+      const searchParamsFilter = this.searchParams || {};
+      const filterCustomProps = this.filterCustom || {};
+      const tableFilter = this.tableFilter || {};
+      return {
+        ...searchParamsFilter,
+        ...filterCustomProps,
+        ...tableFilter
+      };
+    },
+    toolbarShow() {
+      return cloneDeep(this.toolbar);
+    }
+  },
+
+  watch: {
+    filterAll: {
+      handler() {
+        this.debounceFetchSummary();
+      },
+      deep: true
+    }
+  },
+  async mounted() {
+    await this.debounceFetchSummary();
+  },
+  methods: {
+    renderStatus(item) {
+      return STATUS_INVENTORY.find(({ value }) => item.status === value);
+    },
+    changeTableFilter(val) {
+      this.tableFilter = val || {};
+    },
+    changeColumnShows(val) {
+      this.columnShows = val;
+    },
+    async getSummary(params) {
+      // if (!this.showColumnsPrice) {
+      //   return;
+      // }
+
+      try {
+        const { data } = await this.$axios.post(
+          "/inventory/revenue/summary",
+          params
+        );
+        this.summary = data?.data;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    debounceFetchSummary() {
+      if (this.timeoutSummary) {
+        clearTimeout(this.timeoutSummary);
+      }
+
+      this.timeoutSummary = setTimeout(() => {
+        this.timeoutSummary = null;
+        this.getSummary(this.filterAll);
+      }, 1000);
+    },
+    renderShowColumn(column) {
+      if (column.value) {
+        switch (column.value) {
+          case "num_click":
+            return this.$filters.numberSpace(this.summary?.num_click);
+          case "num_view":
+            return this.$filters.numberSpace(this.summary?.num_view);
+          case "ctr":
+            return this.$filters.numberSpace(this.summary?.ctr);
+          case "total_money":
+            return this.$filters.numberSpace(this.summary?.total_money);
+          default:
+            return null;
+        }
+      }
+    }
+  }
+};
+</script>
+
+<style scoped></style>

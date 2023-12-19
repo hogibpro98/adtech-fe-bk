@@ -1,0 +1,14 @@
+.v-dialog--fullscreen {
+  .full-dialog-header, .full-dialog-footer {
+    flex-basis: 0%;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .full-dialog-content{
+    flex: 1
+  }
+}
+.vm-markdown-html{
+  padding: 0 !important;
+}
